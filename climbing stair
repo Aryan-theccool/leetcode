@@ -1,0 +1,18 @@
+class Solution {
+public:
+int firse(int n ,vector<int> & dp){
+    if(n<2){
+            return 1;
+        }
+       dp[0]=1;
+       dp[1]=1;
+       if(dp[n]!=-1)return dp[n];
+return dp[n]=firse(n-1,dp)+
+               firse(n-2,dp);
+}
+    int climbStairs(int n) {
+    vector<int>  dp(n+1,-1);
+    return firse(n,dp);
+
+    }
+};
