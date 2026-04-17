@@ -1,0 +1,139 @@
+// class Solution {
+//   public:
+  
+//     bool cycle = false;
+
+//     void dfs(vector<vector<int>>& a, int node, vector<bool> & path, vector<bool>& vis) {
+//         vis[node] = true;
+//         path[node]=true;
+
+//         for(int j = 0; j < a[node].size(); j++) {
+//             int neigh = a[node][j];
+
+//             if(vis[neigh]==1 && path[neigh]==1) {
+//               cycle=true;
+//             }
+//             else if(vis[neigh] ==0) {
+//  dfs(a, neigh, path, vis);            }
+//         }
+//         path[node]=0;
+//         return;
+//     }
+
+//   bool isCyclic(int V, vector<vector<int>> &edges) {
+//         vector<vector<int>> a(V);
+// class Solution {
+//   public:
+  
+//     bool cycle = false;
+
+//     void dfs(vector<vector<int>>& a, int node, vector<bool> & path, vector<bool>& vis) {
+//         vis[node] = true;
+//         path[node]=true;
+
+//         for(int j = 0; j < a[node].size(); j++) {
+//             int neigh = a[node][j];
+
+//             if(vis[neigh]==1 && path[neigh]==1) {
+//               cycle=true;
+//             }
+//             else if(vis[neigh] ==0) {
+//  dfs(a, neigh, path, vis);            }
+//         }
+//         path[node]=0;
+//         return;
+//     }
+
+//   bool isCyclic(int V, vector<vector<int>> &edges) {
+//         vector<vector<int>> a(V);
+//         vector<bool> path;
+
+//         for(int i = 0; i < edges.size(); i++) {
+//             int src = edges[i][0];
+//             int dest = edges[i][1];
+
+//             a[src].push_back(dest);
+//         }
+
+//         vector<bool> vis(V, false);
+
+//         for(int i = 0; i < V; i++) {
+//             if(!vis[i]) {
+//                 dfs(a, i,path, vis);
+//             }
+//         }
+
+//         return cycle;
+    
+        
+        
+//     }
+// };
+//         for(int i = 0; i < edges.size(); i++) {
+//             int src = edges[i][0];
+//             int dest = edges[i][1];
+
+//             a[src].push_back(dest);
+//         }
+
+//         vector<bool> vis(V, false);
+
+//         for(int i = 0; i < V; i++) {
+//             if(!vis[i]) {
+//                 dfs(a, i,path, vis);
+//             }
+//         }
+
+//         return cycle;
+    
+        
+        
+//     }
+// };
+
+
+class Solution {
+public:
+
+    bool cycle = false;
+
+    void dfs(vector<vector<int>>& a, int node, vector<bool>& path, vector<bool>& vis) {
+        vis[node] = true;
+        path[node] = true;
+
+        for(int j = 0; j < a[node].size(); j++) {
+            int neigh = a[node][j];
+
+            if(vis[neigh] && path[neigh]) {
+                cycle = true;
+            }
+            else if(!vis[neigh]) {
+                dfs(a, neigh, path, vis);
+            }
+        }
+
+        path[node] = false;
+    }
+
+    bool isCyclic(int V, vector<vector<int>>& edges) {
+        vector<vector<int>> a(V);
+
+        for(int i = 0; i < edges.size(); i++) {
+            int src = edges[i][0];
+            int dest = edges[i][1];
+
+            a[src].push_back(dest);
+        }
+
+        vector<bool> vis(V, false);
+        vector<bool> path(V, false);   // ✅ fixed
+
+        for(int i = 0; i < V; i++) {
+            if(!vis[i]) {
+                dfs(a, i, path, vis);
+            }
+        }
+
+        return cycle;
+    }
+};
